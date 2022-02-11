@@ -1,0 +1,14 @@
+{
+  "packageName": "sdk-ebay-rest-media",
+  "composerVendorName": "macropage",
+  "composerProjectName": "sdk-ebay-rest-media",
+  "artifactVersion": "2.3.2",
+  "invokerPackage": "macropage\\SDKs\\ebay\\rest\\media",
+  "modelPackage": "Model",
+  "apiPackage": "API",
+  "variableNamingConvention": "camelCase",
+  "srcBasePath": "src",
+  "gitUserId": "macropage",
+  "gitRepoId": "sdk-ebay-rest-media",
+  "validateSpec": false
+}
