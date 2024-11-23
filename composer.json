@@ -1,6 +1,5 @@
 {
     "name": "macropage/sdk-ebay-rest-media",
-    "version": "2.3.2",
     "description": "The <b>Media API</b> lets sellers to create, upload, and retrieve files, including:<ul><li>videos</li><li>documents (for GPSR regulations)</li></ul>",
     "keywords": [
         "openapitools",
