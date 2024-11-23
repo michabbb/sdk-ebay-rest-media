@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**classification** | **string[]** | The intended use for this video content. The video’s classification is used to associate the video with a user or seller. Currently, the classification of all videos should be set to &lt;code&gt;ITEM&lt;/code&gt;. | [optional]
+**classification** | **string[]** | The intended use for this video content. Currently, videos can only be added and associated with eBay listings, so the only supported value is &lt;code&gt;ITEM&lt;/code&gt;. | [optional]
 **description** | **string** | The description of the video. The video description is an optional field that can be set using the &lt;a href&#x3D;\&quot; /api-docs/commerce/media/resources/video/methods/createVideo\&quot; target&#x3D;\&quot;_blank\&quot;&gt;createVideo&lt;/a&gt; method. | [optional]
-**expirationDate** | **string** | The expiration date of the video in Coordinated Universal Time (UTC). The video’s expiration date is automatically set to 365 days (one year) after the video’s initial upload. | [optional]
+**expirationDate** | **string** | The expiration date of the video in Coordinated Universal Time (UTC). The video’s expiration date is automatically set to 30 days after the video’s initial upload. | [optional]
 **moderation** | [**\macropage\SDKs\ebay\rest\media\Model\Moderation**](Moderation.md) |  | [optional]
 **playLists** | [**\macropage\SDKs\ebay\rest\media\Model\Play[]**](Play.md) | The playlist created for the uploaded video, which provides the streaming video URLs to play the video. The supported streaming video protocols are DASH (Dynamic Adaptive Streaming over HTTP) and HLS (HTTP Live Streaming). The playlist will only be generated if a video is successfully uploaded with a status of &lt;code&gt;LIVE&lt;/code&gt;. | [optional]
 **size** | **int** | The size, in bytes, of the video content. | [optional]
