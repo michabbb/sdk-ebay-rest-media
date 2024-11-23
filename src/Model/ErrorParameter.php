@@ -1,6 +1,6 @@
 <?php
 /**
- * CreateVideoRequest
+ * ErrorParameter
  *
  * PHP version 7.3
  *
@@ -32,10 +32,9 @@ use \ArrayAccess;
 use \macropage\SDKs\ebay\rest\media\ObjectSerializer;
 
 /**
- * CreateVideoRequest Class Doc Comment
+ * ErrorParameter Class Doc Comment
  *
  * @category Class
- * @description The request to create a video, which must contain the video&#39;s &lt;b&gt;title&lt;/b&gt;, &lt;b&gt;size&lt;/b&gt;, and &lt;b&gt;classification&lt;/b&gt;. &lt;b&gt;Description&lt;/b&gt; is an optional field when creating videos.
  * @package  macropage\SDKs\ebay\rest\media
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -43,7 +42,7 @@ use \macropage\SDKs\ebay\rest\media\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class CreateVideoRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class ErrorParameter implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -52,7 +51,7 @@ class CreateVideoRequest implements ModelInterface, ArrayAccess, \JsonSerializab
       *
       * @var string
       */
-    protected static $openAPIModelName = 'CreateVideoRequest';
+    protected static $openAPIModelName = 'ErrorParameter';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -60,10 +59,8 @@ class CreateVideoRequest implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var string[]
       */
     protected static $openAPITypes = [
-        'classification' => 'string[]',
-        'description' => 'string',
-        'size' => 'int',
-        'title' => 'string'
+        'name' => 'string',
+        'value' => 'string'
     ];
 
     /**
@@ -74,10 +71,8 @@ class CreateVideoRequest implements ModelInterface, ArrayAccess, \JsonSerializab
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'classification' => null,
-        'description' => null,
-        'size' => 'int32',
-        'title' => null
+        'name' => null,
+        'value' => null
     ];
 
     /**
@@ -107,10 +102,8 @@ class CreateVideoRequest implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $attributeMap = [
-        'classification' => 'classification',
-        'description' => 'description',
-        'size' => 'size',
-        'title' => 'title'
+        'name' => 'name',
+        'value' => 'value'
     ];
 
     /**
@@ -119,10 +112,8 @@ class CreateVideoRequest implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $setters = [
-        'classification' => 'setClassification',
-        'description' => 'setDescription',
-        'size' => 'setSize',
-        'title' => 'setTitle'
+        'name' => 'setName',
+        'value' => 'setValue'
     ];
 
     /**
@@ -131,10 +122,8 @@ class CreateVideoRequest implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $getters = [
-        'classification' => 'getClassification',
-        'description' => 'getDescription',
-        'size' => 'getSize',
-        'title' => 'getTitle'
+        'name' => 'getName',
+        'value' => 'getValue'
     ];
 
     /**
@@ -194,10 +183,8 @@ class CreateVideoRequest implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     public function __construct(array $data = null)
     {
-        $this->container['classification'] = $data['classification'] ?? null;
-        $this->container['description'] = $data['description'] ?? null;
-        $this->container['size'] = $data['size'] ?? null;
-        $this->container['title'] = $data['title'] ?? null;
+        $this->container['name'] = $data['name'] ?? null;
+        $this->container['value'] = $data['value'] ?? null;
     }
 
     /**
@@ -225,97 +212,49 @@ class CreateVideoRequest implements ModelInterface, ArrayAccess, \JsonSerializab
 
 
     /**
-     * Gets classification
-     *
-     * @return string[]|null
-     */
-    public function getClassification()
-    {
-        return $this->container['classification'];
-    }
-
-    /**
-     * Sets classification
-     *
-     * @param string[]|null $classification The intended use for this video content. Currently, videos can only be added and associated with eBay listings, so the only supported value is <code>ITEM</code>.
-     *
-     * @return self
-     */
-    public function setClassification($classification)
-    {
-        $this->container['classification'] = $classification;
-
-        return $this;
-    }
-
-    /**
-     * Gets description
+     * Gets name
      *
      * @return string|null
      */
-    public function getDescription()
+    public function getName()
     {
-        return $this->container['description'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets description
+     * Sets name
      *
-     * @param string|null $description The description of the video.
+     * @param string|null $name The object of the error.
      *
      * @return self
      */
-    public function setDescription($description)
+    public function setName($name)
     {
-        $this->container['description'] = $description;
+        $this->container['name'] = $name;
 
         return $this;
     }
 
     /**
-     * Gets size
-     *
-     * @return int|null
-     */
-    public function getSize()
-    {
-        return $this->container['size'];
-    }
-
-    /**
-     * Sets size
-     *
-     * @param int|null $size The size, in bytes, of the video content. <br><br><b>Max:</b> 157,286,400 bytes
-     *
-     * @return self
-     */
-    public function setSize($size)
-    {
-        $this->container['size'] = $size;
-
-        return $this;
-    }
-
-    /**
-     * Gets title
+     * Gets value
      *
      * @return string|null
      */
-    public function getTitle()
+    public function getValue()
     {
-        return $this->container['title'];
+        return $this->container['value'];
     }
 
     /**
-     * Sets title
+     * Sets value
      *
-     * @param string|null $title The title of the video.
+     * @param string|null $value The value of the object.
      *
      * @return self
      */
-    public function setTitle($title)
+    public function setValue($value)
     {
-        $this->container['title'] = $title;
+        $this->container['value'] = $value;
 
         return $this;
     }

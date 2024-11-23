@@ -1,6 +1,6 @@
 <?php
 /**
- * VideoApi
+ * DocumentApi
  * PHP version 7.3
  *
  * @category Class
@@ -40,14 +40,14 @@ use macropage\SDKs\ebay\rest\media\HeaderSelector;
 use macropage\SDKs\ebay\rest\media\ObjectSerializer;
 
 /**
- * VideoApi Class Doc Comment
+ * DocumentApi Class Doc Comment
  *
  * @category Class
  * @package  macropage\SDKs\ebay\rest\media
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class VideoApi
+class DocumentApi
 {
     /**
      * @var ClientInterface
@@ -116,33 +116,40 @@ class VideoApi
     }
 
     /**
-     * Operation createVideo
+     * Operation createDocument
+     *
+     * This operation contains host(s) defined in the OpenAP spec. Use 'hostIndex' to select the host.
+     * URL: https://api.ebay.com{basePath}
      *
      * @param  string $contentType This header indicates the format of the request body provided by the client. Its value should be set to &lt;b&gt;application/json&lt;/b&gt;. &lt;br&gt;&lt;br&gt; For more information, refer to &lt;a href&#x3D;\&quot;/api-docs/static/rest-request-components.html#HTTP\&quot; target&#x3D;\&quot;_blank \&quot;&gt;HTTP request headers&lt;/a&gt;. (required)
-     * @param  \macropage\SDKs\ebay\rest\media\Model\CreateVideoRequest $createVideoRequest createVideoRequest (optional)
+     * @param  \macropage\SDKs\ebay\rest\media\Model\CreateDocumentRequest $createDocumentRequest createDocumentRequest (optional)
      *
      * @throws \macropage\SDKs\ebay\rest\media\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return void
+     * @return \macropage\SDKs\ebay\rest\media\Model\CreateDocumentResponse
      */
-    public function createVideo($contentType, $createVideoRequest = null)
+    public function createDocument($contentType, $createDocumentRequest = null)
     {
-        $this->createVideoWithHttpInfo($contentType, $createVideoRequest);
+        list($response) = $this->createDocumentWithHttpInfo($contentType, $createDocumentRequest);
+        return $response;
     }
 
     /**
-     * Operation createVideoWithHttpInfo
+     * Operation createDocumentWithHttpInfo
+     *
+     * This operation contains host(s) defined in the OpenAP spec. Use 'hostIndex' to select the host.
+     * URL: https://api.ebay.com{basePath}
      *
      * @param  string $contentType This header indicates the format of the request body provided by the client. Its value should be set to &lt;b&gt;application/json&lt;/b&gt;. &lt;br&gt;&lt;br&gt; For more information, refer to &lt;a href&#x3D;\&quot;/api-docs/static/rest-request-components.html#HTTP\&quot; target&#x3D;\&quot;_blank \&quot;&gt;HTTP request headers&lt;/a&gt;. (required)
-     * @param  \macropage\SDKs\ebay\rest\media\Model\CreateVideoRequest $createVideoRequest (optional)
+     * @param  \macropage\SDKs\ebay\rest\media\Model\CreateDocumentRequest $createDocumentRequest (optional)
      *
      * @throws \macropage\SDKs\ebay\rest\media\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \macropage\SDKs\ebay\rest\media\Model\CreateDocumentResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function createVideoWithHttpInfo($contentType, $createVideoRequest = null)
+    public function createDocumentWithHttpInfo($contentType, $createDocumentRequest = null)
     {
-        $request = $this->createVideoRequest($contentType, $createVideoRequest);
+        $request = $this->createDocumentRequest($contentType, $createDocumentRequest);
 
         try {
             $options = $this->createHttpClientOption();
@@ -179,27 +186,64 @@ class VideoApi
                 );
             }
 
-            return [null, $statusCode, $response->getHeaders()];
+            switch($statusCode) {
+                case 201:
+                    if ('\macropage\SDKs\ebay\rest\media\Model\CreateDocumentResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\macropage\SDKs\ebay\rest\media\Model\CreateDocumentResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\macropage\SDKs\ebay\rest\media\Model\CreateDocumentResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
+                case 201:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\macropage\SDKs\ebay\rest\media\Model\CreateDocumentResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation createVideoAsync
+     * Operation createDocumentAsync
+     *
+     * This operation contains host(s) defined in the OpenAP spec. Use 'hostIndex' to select the host.
+     * URL: https://api.ebay.com{basePath}
      *
      * @param  string $contentType This header indicates the format of the request body provided by the client. Its value should be set to &lt;b&gt;application/json&lt;/b&gt;. &lt;br&gt;&lt;br&gt; For more information, refer to &lt;a href&#x3D;\&quot;/api-docs/static/rest-request-components.html#HTTP\&quot; target&#x3D;\&quot;_blank \&quot;&gt;HTTP request headers&lt;/a&gt;. (required)
-     * @param  \macropage\SDKs\ebay\rest\media\Model\CreateVideoRequest $createVideoRequest (optional)
+     * @param  \macropage\SDKs\ebay\rest\media\Model\CreateDocumentRequest $createDocumentRequest (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createVideoAsync($contentType, $createVideoRequest = null)
+    public function createDocumentAsync($contentType, $createDocumentRequest = null)
     {
-        return $this->createVideoAsyncWithHttpInfo($contentType, $createVideoRequest)
+        return $this->createDocumentAsyncWithHttpInfo($contentType, $createDocumentRequest)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -208,24 +252,37 @@ class VideoApi
     }
 
     /**
-     * Operation createVideoAsyncWithHttpInfo
+     * Operation createDocumentAsyncWithHttpInfo
+     *
+     * This operation contains host(s) defined in the OpenAP spec. Use 'hostIndex' to select the host.
+     * URL: https://api.ebay.com{basePath}
      *
      * @param  string $contentType This header indicates the format of the request body provided by the client. Its value should be set to &lt;b&gt;application/json&lt;/b&gt;. &lt;br&gt;&lt;br&gt; For more information, refer to &lt;a href&#x3D;\&quot;/api-docs/static/rest-request-components.html#HTTP\&quot; target&#x3D;\&quot;_blank \&quot;&gt;HTTP request headers&lt;/a&gt;. (required)
-     * @param  \macropage\SDKs\ebay\rest\media\Model\CreateVideoRequest $createVideoRequest (optional)
+     * @param  \macropage\SDKs\ebay\rest\media\Model\CreateDocumentRequest $createDocumentRequest (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createVideoAsyncWithHttpInfo($contentType, $createVideoRequest = null)
+    public function createDocumentAsyncWithHttpInfo($contentType, $createDocumentRequest = null)
     {
-        $returnType = '';
-        $request = $this->createVideoRequest($contentType, $createVideoRequest);
+        $returnType = '\macropage\SDKs\ebay\rest\media\Model\CreateDocumentResponse';
+        $request = $this->createDocumentRequest($contentType, $createDocumentRequest);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
@@ -245,24 +302,27 @@ class VideoApi
     }
 
     /**
-     * Create request for operation 'createVideo'
+     * Create request for operation 'createDocument'
+     *
+     * This operation contains host(s) defined in the OpenAP spec. Use 'hostIndex' to select the host.
+     * URL: https://api.ebay.com{basePath}
      *
      * @param  string $contentType This header indicates the format of the request body provided by the client. Its value should be set to &lt;b&gt;application/json&lt;/b&gt;. &lt;br&gt;&lt;br&gt; For more information, refer to &lt;a href&#x3D;\&quot;/api-docs/static/rest-request-components.html#HTTP\&quot; target&#x3D;\&quot;_blank \&quot;&gt;HTTP request headers&lt;/a&gt;. (required)
-     * @param  \macropage\SDKs\ebay\rest\media\Model\CreateVideoRequest $createVideoRequest (optional)
+     * @param  \macropage\SDKs\ebay\rest\media\Model\CreateDocumentRequest $createDocumentRequest (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function createVideoRequest($contentType, $createVideoRequest = null)
+    public function createDocumentRequest($contentType, $createDocumentRequest = null)
     {
         // verify the required parameter 'contentType' is set
         if ($contentType === null || (is_array($contentType) && count($contentType) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $contentType when calling createVideo'
+                'Missing the required parameter $contentType when calling createDocument'
             );
         }
 
-        $resourcePath = '/video';
+        $resourcePath = '/document';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -279,21 +339,21 @@ class VideoApi
 
         if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
-                []
+                ['application/json']
             );
         } else {
             $headers = $this->headerSelector->selectHeaders(
-                [],
+                ['application/json'],
                 ['application/json']
             );
         }
 
         // for model (json/xml)
-        if (isset($createVideoRequest)) {
+        if (isset($createDocumentRequest)) {
             if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($createVideoRequest));
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($createDocumentRequest));
             } else {
-                $httpBody = $createVideoRequest;
+                $httpBody = $createDocumentRequest;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -335,42 +395,54 @@ class VideoApi
             $headers
         );
 
+        $operationHosts = ["https://api.ebay.com{basePath}"];
+        if ($this->hostIndex < 0 || $this->hostIndex >= sizeof($operationHosts)) {
+            throw new \InvalidArgumentException("Invalid index {$this->hostIndex} when selecting the host. Must be less than ".sizeof($operationHosts));
+        }
+        $operationHost = $operationHosts[$this->hostIndex];
+
         $query = \GuzzleHttp\Psr7\Query::build($queryParams);
         return new Request(
             'POST',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
     }
 
     /**
-     * Operation getVideo
+     * Operation getDocument
      *
-     * @param  string $videoId The unique identifier of the video to be retrieved. (required)
+     * This operation contains host(s) defined in the OpenAP spec. Use 'hostIndex' to select the host.
+     * URL: https://api.ebay.com{basePath}
+     *
+     * @param  string $documentId The unique identifier of the document for which status and metadata is being retrieved.&lt;br&gt;&lt;br&gt;This value is returned in the response of the &lt;a href&#x3D;\&quot;/api-docs/commerce/media/resources/document/methods/createDocument\&quot; target&#x3D;\&quot;_blank\&quot;&gt;createDocument&lt;/a&gt; method. (required)
      *
      * @throws \macropage\SDKs\ebay\rest\media\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \macropage\SDKs\ebay\rest\media\Model\Video
+     * @return \macropage\SDKs\ebay\rest\media\Model\DocumentResponse
      */
-    public function getVideo($videoId)
+    public function getDocument($documentId)
     {
-        list($response) = $this->getVideoWithHttpInfo($videoId);
+        list($response) = $this->getDocumentWithHttpInfo($documentId);
         return $response;
     }
 
     /**
-     * Operation getVideoWithHttpInfo
+     * Operation getDocumentWithHttpInfo
      *
-     * @param  string $videoId The unique identifier of the video to be retrieved. (required)
+     * This operation contains host(s) defined in the OpenAP spec. Use 'hostIndex' to select the host.
+     * URL: https://api.ebay.com{basePath}
+     *
+     * @param  string $documentId The unique identifier of the document for which status and metadata is being retrieved.&lt;br&gt;&lt;br&gt;This value is returned in the response of the &lt;a href&#x3D;\&quot;/api-docs/commerce/media/resources/document/methods/createDocument\&quot; target&#x3D;\&quot;_blank\&quot;&gt;createDocument&lt;/a&gt; method. (required)
      *
      * @throws \macropage\SDKs\ebay\rest\media\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \macropage\SDKs\ebay\rest\media\Model\Video, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \macropage\SDKs\ebay\rest\media\Model\DocumentResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getVideoWithHttpInfo($videoId)
+    public function getDocumentWithHttpInfo($documentId)
     {
-        $request = $this->getVideoRequest($videoId);
+        $request = $this->getDocumentRequest($documentId);
 
         try {
             $options = $this->createHttpClientOption();
@@ -409,20 +481,20 @@ class VideoApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\macropage\SDKs\ebay\rest\media\Model\Video' === '\SplFileObject') {
+                    if ('\macropage\SDKs\ebay\rest\media\Model\DocumentResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\macropage\SDKs\ebay\rest\media\Model\Video', []),
+                        ObjectSerializer::deserialize($content, '\macropage\SDKs\ebay\rest\media\Model\DocumentResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\macropage\SDKs\ebay\rest\media\Model\Video';
+            $returnType = '\macropage\SDKs\ebay\rest\media\Model\DocumentResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -440,7 +512,7 @@ class VideoApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\macropage\SDKs\ebay\rest\media\Model\Video',
+                        '\macropage\SDKs\ebay\rest\media\Model\DocumentResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -451,16 +523,19 @@ class VideoApi
     }
 
     /**
-     * Operation getVideoAsync
+     * Operation getDocumentAsync
      *
-     * @param  string $videoId The unique identifier of the video to be retrieved. (required)
+     * This operation contains host(s) defined in the OpenAP spec. Use 'hostIndex' to select the host.
+     * URL: https://api.ebay.com{basePath}
+     *
+     * @param  string $documentId The unique identifier of the document for which status and metadata is being retrieved.&lt;br&gt;&lt;br&gt;This value is returned in the response of the &lt;a href&#x3D;\&quot;/api-docs/commerce/media/resources/document/methods/createDocument\&quot; target&#x3D;\&quot;_blank\&quot;&gt;createDocument&lt;/a&gt; method. (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getVideoAsync($videoId)
+    public function getDocumentAsync($documentId)
     {
-        return $this->getVideoAsyncWithHttpInfo($videoId)
+        return $this->getDocumentAsyncWithHttpInfo($documentId)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -469,17 +544,20 @@ class VideoApi
     }
 
     /**
-     * Operation getVideoAsyncWithHttpInfo
+     * Operation getDocumentAsyncWithHttpInfo
      *
-     * @param  string $videoId The unique identifier of the video to be retrieved. (required)
+     * This operation contains host(s) defined in the OpenAP spec. Use 'hostIndex' to select the host.
+     * URL: https://api.ebay.com{basePath}
+     *
+     * @param  string $documentId The unique identifier of the document for which status and metadata is being retrieved.&lt;br&gt;&lt;br&gt;This value is returned in the response of the &lt;a href&#x3D;\&quot;/api-docs/commerce/media/resources/document/methods/createDocument\&quot; target&#x3D;\&quot;_blank\&quot;&gt;createDocument&lt;/a&gt; method. (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getVideoAsyncWithHttpInfo($videoId)
+    public function getDocumentAsyncWithHttpInfo($documentId)
     {
-        $returnType = '\macropage\SDKs\ebay\rest\media\Model\Video';
-        $request = $this->getVideoRequest($videoId);
+        $returnType = '\macropage\SDKs\ebay\rest\media\Model\DocumentResponse';
+        $request = $this->getDocumentRequest($documentId);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -515,23 +593,26 @@ class VideoApi
     }
 
     /**
-     * Create request for operation 'getVideo'
+     * Create request for operation 'getDocument'
      *
-     * @param  string $videoId The unique identifier of the video to be retrieved. (required)
+     * This operation contains host(s) defined in the OpenAP spec. Use 'hostIndex' to select the host.
+     * URL: https://api.ebay.com{basePath}
+     *
+     * @param  string $documentId The unique identifier of the document for which status and metadata is being retrieved.&lt;br&gt;&lt;br&gt;This value is returned in the response of the &lt;a href&#x3D;\&quot;/api-docs/commerce/media/resources/document/methods/createDocument\&quot; target&#x3D;\&quot;_blank\&quot;&gt;createDocument&lt;/a&gt; method. (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getVideoRequest($videoId)
+    public function getDocumentRequest($documentId)
     {
-        // verify the required parameter 'videoId' is set
-        if ($videoId === null || (is_array($videoId) && count($videoId) === 0)) {
+        // verify the required parameter 'documentId' is set
+        if ($documentId === null || (is_array($documentId) && count($documentId) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $videoId when calling getVideo'
+                'Missing the required parameter $documentId when calling getDocument'
             );
         }
 
-        $resourcePath = '/video/{video_id}';
+        $resourcePath = '/document/{document_id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -541,10 +622,10 @@ class VideoApi
 
 
         // path params
-        if ($videoId !== null) {
+        if ($documentId !== null) {
             $resourcePath = str_replace(
-                '{' . 'video_id' . '}',
-                ObjectSerializer::toPathValue($videoId),
+                '{' . 'document_id' . '}',
+                ObjectSerializer::toPathValue($documentId),
                 $resourcePath
             );
         }
@@ -602,49 +683,56 @@ class VideoApi
             $headers
         );
 
+        $operationHosts = ["https://api.ebay.com{basePath}"];
+        if ($this->hostIndex < 0 || $this->hostIndex >= sizeof($operationHosts)) {
+            throw new \InvalidArgumentException("Invalid index {$this->hostIndex} when selecting the host. Must be less than ".sizeof($operationHosts));
+        }
+        $operationHost = $operationHosts[$this->hostIndex];
+
         $query = \GuzzleHttp\Psr7\Query::build($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
     }
 
     /**
-     * Operation uploadVideo
+     * Operation uploadDocument
      *
-     * @param  string $contentType Use this header to specify the content type for the upload. The Content-Type should be set to &lt;code&gt;application/octet-stream&lt;/code&gt;. (required)
-     * @param  string $videoId The unique identifier of the video to be uploaded. (required)
-     * @param  string $contentLength Use this header to specify the content length for the upload. Use Content-Range: bytes {1}-{2}/{3} and Content-Length:{4} headers.&lt;br /&gt;&lt;br /&gt;&lt;span class&#x3D;\&quot;tablenote\&quot;&gt;&lt;span style&#x3D;\&quot;color:#004680\&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/span&gt; This header is optional and is only required for &lt;i&gt;resumable&lt;/i&gt; uploads (when an upload is interrupted and must be resumed from a certain point).&lt;/span&gt; (optional)
-     * @param  string $contentRange Use this header to specify the content range for the upload. The Content-Range should be of the following bytes ((?:[0-9]+-[0-9]+)|\\\\\\\\*)/([0-9]+|\\\\\\\\*) pattern.&lt;br /&gt;&lt;br /&gt;&lt;span class&#x3D;\&quot;tablenote\&quot;&gt;&lt;span style&#x3D;\&quot;color:#004680\&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/span&gt; This header is optional and is only required for &lt;i&gt;resumable&lt;/i&gt; uploads (when an upload is interrupted and must be resumed from a certain point).&lt;/span&gt; (optional)
-     * @param  object $body The request payload for this method is the input stream for the video source. The input source must be an .mp4 file of the type MPEG-4 Part 10 or Advanced Video Coding (MPEG-4 AVC). (optional)
+     * This operation contains host(s) defined in the OpenAP spec. Use 'hostIndex' to select the host.
+     * URL: https://api.ebay.com{basePath}
+     *
+     * @param  string $documentId The unique identifier of the document to be uploaded.&lt;br&gt;&lt;br&gt;This value is returned in the response of the &lt;a href&#x3D;\&quot;/api-docs/commerce/media/resources/document/methods/createDocument\&quot; target&#x3D;\&quot;_blank\&quot;&gt;createDocument&lt;/a&gt; method. (required)
+     * @param  string $contentType This header indicates the format of the request body provided by the client. Its value should be set to &lt;b&gt;multipart/form-data&lt;/b&gt;. &lt;br&gt;&lt;br&gt; For more information, refer to &lt;a href&#x3D;\&quot;/api-docs/static/rest-request-components.html#HTTP\&quot; target&#x3D;\&quot;_blank \&quot;&gt;HTTP request headers&lt;/a&gt;. (required)
      *
      * @throws \macropage\SDKs\ebay\rest\media\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return void
+     * @return \macropage\SDKs\ebay\rest\media\Model\DocumentResponse
      */
-    public function uploadVideo($contentType, $videoId, $contentLength = null, $contentRange = null, $body = null)
+    public function uploadDocument($documentId, $contentType)
     {
-        $this->uploadVideoWithHttpInfo($contentType, $videoId, $contentLength, $contentRange, $body);
+        list($response) = $this->uploadDocumentWithHttpInfo($documentId, $contentType);
+        return $response;
     }
 
     /**
-     * Operation uploadVideoWithHttpInfo
+     * Operation uploadDocumentWithHttpInfo
      *
-     * @param  string $contentType Use this header to specify the content type for the upload. The Content-Type should be set to &lt;code&gt;application/octet-stream&lt;/code&gt;. (required)
-     * @param  string $videoId The unique identifier of the video to be uploaded. (required)
-     * @param  string $contentLength Use this header to specify the content length for the upload. Use Content-Range: bytes {1}-{2}/{3} and Content-Length:{4} headers.&lt;br /&gt;&lt;br /&gt;&lt;span class&#x3D;\&quot;tablenote\&quot;&gt;&lt;span style&#x3D;\&quot;color:#004680\&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/span&gt; This header is optional and is only required for &lt;i&gt;resumable&lt;/i&gt; uploads (when an upload is interrupted and must be resumed from a certain point).&lt;/span&gt; (optional)
-     * @param  string $contentRange Use this header to specify the content range for the upload. The Content-Range should be of the following bytes ((?:[0-9]+-[0-9]+)|\\\\\\\\*)/([0-9]+|\\\\\\\\*) pattern.&lt;br /&gt;&lt;br /&gt;&lt;span class&#x3D;\&quot;tablenote\&quot;&gt;&lt;span style&#x3D;\&quot;color:#004680\&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/span&gt; This header is optional and is only required for &lt;i&gt;resumable&lt;/i&gt; uploads (when an upload is interrupted and must be resumed from a certain point).&lt;/span&gt; (optional)
-     * @param  object $body The request payload for this method is the input stream for the video source. The input source must be an .mp4 file of the type MPEG-4 Part 10 or Advanced Video Coding (MPEG-4 AVC). (optional)
+     * This operation contains host(s) defined in the OpenAP spec. Use 'hostIndex' to select the host.
+     * URL: https://api.ebay.com{basePath}
+     *
+     * @param  string $documentId The unique identifier of the document to be uploaded.&lt;br&gt;&lt;br&gt;This value is returned in the response of the &lt;a href&#x3D;\&quot;/api-docs/commerce/media/resources/document/methods/createDocument\&quot; target&#x3D;\&quot;_blank\&quot;&gt;createDocument&lt;/a&gt; method. (required)
+     * @param  string $contentType This header indicates the format of the request body provided by the client. Its value should be set to &lt;b&gt;multipart/form-data&lt;/b&gt;. &lt;br&gt;&lt;br&gt; For more information, refer to &lt;a href&#x3D;\&quot;/api-docs/static/rest-request-components.html#HTTP\&quot; target&#x3D;\&quot;_blank \&quot;&gt;HTTP request headers&lt;/a&gt;. (required)
      *
      * @throws \macropage\SDKs\ebay\rest\media\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \macropage\SDKs\ebay\rest\media\Model\DocumentResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function uploadVideoWithHttpInfo($contentType, $videoId, $contentLength = null, $contentRange = null, $body = null)
+    public function uploadDocumentWithHttpInfo($documentId, $contentType)
     {
-        $request = $this->uploadVideoRequest($contentType, $videoId, $contentLength, $contentRange, $body);
+        $request = $this->uploadDocumentRequest($documentId, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -681,30 +769,64 @@ class VideoApi
                 );
             }
 
-            return [null, $statusCode, $response->getHeaders()];
+            switch($statusCode) {
+                case 200:
+                    if ('\macropage\SDKs\ebay\rest\media\Model\DocumentResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\macropage\SDKs\ebay\rest\media\Model\DocumentResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\macropage\SDKs\ebay\rest\media\Model\DocumentResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\macropage\SDKs\ebay\rest\media\Model\DocumentResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation uploadVideoAsync
+     * Operation uploadDocumentAsync
      *
-     * @param  string $contentType Use this header to specify the content type for the upload. The Content-Type should be set to &lt;code&gt;application/octet-stream&lt;/code&gt;. (required)
-     * @param  string $videoId The unique identifier of the video to be uploaded. (required)
-     * @param  string $contentLength Use this header to specify the content length for the upload. Use Content-Range: bytes {1}-{2}/{3} and Content-Length:{4} headers.&lt;br /&gt;&lt;br /&gt;&lt;span class&#x3D;\&quot;tablenote\&quot;&gt;&lt;span style&#x3D;\&quot;color:#004680\&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/span&gt; This header is optional and is only required for &lt;i&gt;resumable&lt;/i&gt; uploads (when an upload is interrupted and must be resumed from a certain point).&lt;/span&gt; (optional)
-     * @param  string $contentRange Use this header to specify the content range for the upload. The Content-Range should be of the following bytes ((?:[0-9]+-[0-9]+)|\\\\\\\\*)/([0-9]+|\\\\\\\\*) pattern.&lt;br /&gt;&lt;br /&gt;&lt;span class&#x3D;\&quot;tablenote\&quot;&gt;&lt;span style&#x3D;\&quot;color:#004680\&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/span&gt; This header is optional and is only required for &lt;i&gt;resumable&lt;/i&gt; uploads (when an upload is interrupted and must be resumed from a certain point).&lt;/span&gt; (optional)
-     * @param  object $body The request payload for this method is the input stream for the video source. The input source must be an .mp4 file of the type MPEG-4 Part 10 or Advanced Video Coding (MPEG-4 AVC). (optional)
+     * This operation contains host(s) defined in the OpenAP spec. Use 'hostIndex' to select the host.
+     * URL: https://api.ebay.com{basePath}
+     *
+     * @param  string $documentId The unique identifier of the document to be uploaded.&lt;br&gt;&lt;br&gt;This value is returned in the response of the &lt;a href&#x3D;\&quot;/api-docs/commerce/media/resources/document/methods/createDocument\&quot; target&#x3D;\&quot;_blank\&quot;&gt;createDocument&lt;/a&gt; method. (required)
+     * @param  string $contentType This header indicates the format of the request body provided by the client. Its value should be set to &lt;b&gt;multipart/form-data&lt;/b&gt;. &lt;br&gt;&lt;br&gt; For more information, refer to &lt;a href&#x3D;\&quot;/api-docs/static/rest-request-components.html#HTTP\&quot; target&#x3D;\&quot;_blank \&quot;&gt;HTTP request headers&lt;/a&gt;. (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function uploadVideoAsync($contentType, $videoId, $contentLength = null, $contentRange = null, $body = null)
+    public function uploadDocumentAsync($documentId, $contentType)
     {
-        return $this->uploadVideoAsyncWithHttpInfo($contentType, $videoId, $contentLength, $contentRange, $body)
+        return $this->uploadDocumentAsyncWithHttpInfo($documentId, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -713,27 +835,37 @@ class VideoApi
     }
 
     /**
-     * Operation uploadVideoAsyncWithHttpInfo
+     * Operation uploadDocumentAsyncWithHttpInfo
      *
-     * @param  string $contentType Use this header to specify the content type for the upload. The Content-Type should be set to &lt;code&gt;application/octet-stream&lt;/code&gt;. (required)
-     * @param  string $videoId The unique identifier of the video to be uploaded. (required)
-     * @param  string $contentLength Use this header to specify the content length for the upload. Use Content-Range: bytes {1}-{2}/{3} and Content-Length:{4} headers.&lt;br /&gt;&lt;br /&gt;&lt;span class&#x3D;\&quot;tablenote\&quot;&gt;&lt;span style&#x3D;\&quot;color:#004680\&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/span&gt; This header is optional and is only required for &lt;i&gt;resumable&lt;/i&gt; uploads (when an upload is interrupted and must be resumed from a certain point).&lt;/span&gt; (optional)
-     * @param  string $contentRange Use this header to specify the content range for the upload. The Content-Range should be of the following bytes ((?:[0-9]+-[0-9]+)|\\\\\\\\*)/([0-9]+|\\\\\\\\*) pattern.&lt;br /&gt;&lt;br /&gt;&lt;span class&#x3D;\&quot;tablenote\&quot;&gt;&lt;span style&#x3D;\&quot;color:#004680\&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/span&gt; This header is optional and is only required for &lt;i&gt;resumable&lt;/i&gt; uploads (when an upload is interrupted and must be resumed from a certain point).&lt;/span&gt; (optional)
-     * @param  object $body The request payload for this method is the input stream for the video source. The input source must be an .mp4 file of the type MPEG-4 Part 10 or Advanced Video Coding (MPEG-4 AVC). (optional)
+     * This operation contains host(s) defined in the OpenAP spec. Use 'hostIndex' to select the host.
+     * URL: https://api.ebay.com{basePath}
+     *
+     * @param  string $documentId The unique identifier of the document to be uploaded.&lt;br&gt;&lt;br&gt;This value is returned in the response of the &lt;a href&#x3D;\&quot;/api-docs/commerce/media/resources/document/methods/createDocument\&quot; target&#x3D;\&quot;_blank\&quot;&gt;createDocument&lt;/a&gt; method. (required)
+     * @param  string $contentType This header indicates the format of the request body provided by the client. Its value should be set to &lt;b&gt;multipart/form-data&lt;/b&gt;. &lt;br&gt;&lt;br&gt; For more information, refer to &lt;a href&#x3D;\&quot;/api-docs/static/rest-request-components.html#HTTP\&quot; target&#x3D;\&quot;_blank \&quot;&gt;HTTP request headers&lt;/a&gt;. (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function uploadVideoAsyncWithHttpInfo($contentType, $videoId, $contentLength = null, $contentRange = null, $body = null)
+    public function uploadDocumentAsyncWithHttpInfo($documentId, $contentType)
     {
-        $returnType = '';
-        $request = $this->uploadVideoRequest($contentType, $videoId, $contentLength, $contentRange, $body);
+        $returnType = '\macropage\SDKs\ebay\rest\media\Model\DocumentResponse';
+        $request = $this->uploadDocumentRequest($documentId, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
@@ -753,33 +885,33 @@ class VideoApi
     }
 
     /**
-     * Create request for operation 'uploadVideo'
+     * Create request for operation 'uploadDocument'
      *
-     * @param  string $contentType Use this header to specify the content type for the upload. The Content-Type should be set to &lt;code&gt;application/octet-stream&lt;/code&gt;. (required)
-     * @param  string $videoId The unique identifier of the video to be uploaded. (required)
-     * @param  string $contentLength Use this header to specify the content length for the upload. Use Content-Range: bytes {1}-{2}/{3} and Content-Length:{4} headers.&lt;br /&gt;&lt;br /&gt;&lt;span class&#x3D;\&quot;tablenote\&quot;&gt;&lt;span style&#x3D;\&quot;color:#004680\&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/span&gt; This header is optional and is only required for &lt;i&gt;resumable&lt;/i&gt; uploads (when an upload is interrupted and must be resumed from a certain point).&lt;/span&gt; (optional)
-     * @param  string $contentRange Use this header to specify the content range for the upload. The Content-Range should be of the following bytes ((?:[0-9]+-[0-9]+)|\\\\\\\\*)/([0-9]+|\\\\\\\\*) pattern.&lt;br /&gt;&lt;br /&gt;&lt;span class&#x3D;\&quot;tablenote\&quot;&gt;&lt;span style&#x3D;\&quot;color:#004680\&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/span&gt; This header is optional and is only required for &lt;i&gt;resumable&lt;/i&gt; uploads (when an upload is interrupted and must be resumed from a certain point).&lt;/span&gt; (optional)
-     * @param  object $body The request payload for this method is the input stream for the video source. The input source must be an .mp4 file of the type MPEG-4 Part 10 or Advanced Video Coding (MPEG-4 AVC). (optional)
+     * This operation contains host(s) defined in the OpenAP spec. Use 'hostIndex' to select the host.
+     * URL: https://api.ebay.com{basePath}
+     *
+     * @param  string $documentId The unique identifier of the document to be uploaded.&lt;br&gt;&lt;br&gt;This value is returned in the response of the &lt;a href&#x3D;\&quot;/api-docs/commerce/media/resources/document/methods/createDocument\&quot; target&#x3D;\&quot;_blank\&quot;&gt;createDocument&lt;/a&gt; method. (required)
+     * @param  string $contentType This header indicates the format of the request body provided by the client. Its value should be set to &lt;b&gt;multipart/form-data&lt;/b&gt;. &lt;br&gt;&lt;br&gt; For more information, refer to &lt;a href&#x3D;\&quot;/api-docs/static/rest-request-components.html#HTTP\&quot; target&#x3D;\&quot;_blank \&quot;&gt;HTTP request headers&lt;/a&gt;. (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function uploadVideoRequest($contentType, $videoId, $contentLength = null, $contentRange = null, $body = null)
+    public function uploadDocumentRequest($documentId, $contentType)
     {
+        // verify the required parameter 'documentId' is set
+        if ($documentId === null || (is_array($documentId) && count($documentId) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $documentId when calling uploadDocument'
+            );
+        }
         // verify the required parameter 'contentType' is set
         if ($contentType === null || (is_array($contentType) && count($contentType) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $contentType when calling uploadVideo'
-            );
-        }
-        // verify the required parameter 'videoId' is set
-        if ($videoId === null || (is_array($videoId) && count($videoId) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $videoId when calling uploadVideo'
+                'Missing the required parameter $contentType when calling uploadDocument'
             );
         }
 
-        $resourcePath = '/video/{video_id}/upload';
+        $resourcePath = '/document/{document_id}/upload';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -788,23 +920,15 @@ class VideoApi
 
 
         // header params
-        if ($contentLength !== null) {
-            $headerParams['Content-Length'] = ObjectSerializer::toHeaderValue($contentLength);
-        }
-        // header params
-        if ($contentRange !== null) {
-            $headerParams['Content-Range'] = ObjectSerializer::toHeaderValue($contentRange);
-        }
-        // header params
         if ($contentType !== null) {
             $headerParams['Content-Type'] = ObjectSerializer::toHeaderValue($contentType);
         }
 
         // path params
-        if ($videoId !== null) {
+        if ($documentId !== null) {
             $resourcePath = str_replace(
-                '{' . 'video_id' . '}',
-                ObjectSerializer::toPathValue($videoId),
+                '{' . 'document_id' . '}',
+                ObjectSerializer::toPathValue($documentId),
                 $resourcePath
             );
         }
@@ -812,23 +936,17 @@ class VideoApi
 
         if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
-                []
+                ['application/json']
             );
         } else {
             $headers = $this->headerSelector->selectHeaders(
-                [],
-                ['application/json']
+                ['application/json'],
+                []
             );
         }
 
         // for model (json/xml)
-        if (isset($body)) {
-            if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($body));
-            } else {
-                $httpBody = $body;
-            }
-        } elseif (count($formParams) > 0) {
+        if (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {
@@ -868,10 +986,16 @@ class VideoApi
             $headers
         );
 
+        $operationHosts = ["https://api.ebay.com{basePath}"];
+        if ($this->hostIndex < 0 || $this->hostIndex >= sizeof($operationHosts)) {
+            throw new \InvalidArgumentException("Invalid index {$this->hostIndex} when selecting the host. Must be less than ".sizeof($operationHosts));
+        }
+        $operationHost = $operationHosts[$this->hostIndex];
+
         $query = \GuzzleHttp\Psr7\Query::build($queryParams);
         return new Request(
             'POST',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );

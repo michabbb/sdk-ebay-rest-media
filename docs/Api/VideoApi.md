@@ -12,7 +12,7 @@ Method | HTTP request | Description
 ## `createVideo()`
 
 ```php
-createVideo($body)
+createVideo($contentType, $createVideoRequest)
 ```
 
 
@@ -26,7 +26,7 @@ This method creates a video. When using this method, specify the <b>title</b>, <
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
-// Configure OAuth2 access token for authorization: Authorization Code
+// Configure OAuth2 access token for authorization: api_auth
 $config = macropage\SDKs\ebay\rest\media\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
@@ -36,10 +36,11 @@ $apiInstance = new macropage\SDKs\ebay\rest\media\Api\VideoApi(
     new GuzzleHttp\Client(),
     $config
 );
-$body = new \macropage\SDKs\ebay\rest\media\Model\CreateVideoRequest(); // \macropage\SDKs\ebay\rest\media\Model\CreateVideoRequest
+$contentType = 'contentType_example'; // string | This header indicates the format of the request body provided by the client. Its value should be set to <b>application/json</b>. <br><br> For more information, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>.
+$createVideoRequest = new \macropage\SDKs\ebay\rest\media\Model\CreateVideoRequest(); // \macropage\SDKs\ebay\rest\media\Model\CreateVideoRequest
 
 try {
-    $apiInstance->createVideo($body);
+    $apiInstance->createVideo($contentType, $createVideoRequest);
 } catch (Exception $e) {
     echo 'Exception when calling VideoApi->createVideo: ', $e->getMessage(), PHP_EOL;
 }
@@ -49,7 +50,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**\macropage\SDKs\ebay\rest\media\Model\CreateVideoRequest**](../Model/CreateVideoRequest.md)|  | [optional]
+ **contentType** | **string**| This header indicates the format of the request body provided by the client. Its value should be set to &lt;b&gt;application/json&lt;/b&gt;. &lt;br&gt;&lt;br&gt; For more information, refer to &lt;a href&#x3D;\&quot;/api-docs/static/rest-request-components.html#HTTP\&quot; target&#x3D;\&quot;_blank \&quot;&gt;HTTP request headers&lt;/a&gt;. |
+ **createVideoRequest** | [**\macropage\SDKs\ebay\rest\media\Model\CreateVideoRequest**](../Model/CreateVideoRequest.md)|  | [optional]
 
 ### Return type
 
@@ -57,11 +59,11 @@ void (empty response body)
 
 ### Authorization
 
-[Authorization Code](../../README.md#Authorization Code)
+[api_auth](../../README.md#api_auth)
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: `application/json`
 - **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
@@ -76,7 +78,7 @@ getVideo($videoId): \macropage\SDKs\ebay\rest\media\Model\Video
 
 
 
-This method retrieves a video's metadata and content given a specified <b>video ID</b>. The method returns the <b>title</b>, <b>size</b>, <b>classification</b>, <b>description</b>, <b>video ID</b>, <b>playList</b>, <b>status</b>, <b>status message</b> (if any), <b>expiration  date</b>, and <b>thumbnail</b> image of the retrieved video. <p>The video’s <b>title</b>, <b>size</b>, <b>classification</b>, and <b>description</b> are set using the <a href=\" /api-docs/commerce/media/resources/video/methods/createVideo\" target=\"_blank\">createVideo</a> method.</p> <p>The video's <b>playList</b> contains two URLs that link to instances of the streaming video based on the supported protocol.</p><p>The <b>status</b> field contains the current status of the video. After a video upload is successfully completed, the video's <b>status</b> will show as <code>PROCESSING</code> until the video reaches one of the terminal states of <code>LIVE</code>, <code>BLOCKED</code> or <code>PROCESSING_FAILED</code>.<p> If a video's processing fails, it could be because the file is corrupted, is too large, or its size doesn’t match what was provided in the metadata. Refer to the error messages to determine the cause of the video’s failure to upload.</p> <p> The <b>status message</b> will indicate why a video was blocked from uploading.</p><p>The video’s <b>expiration date</b> is automatically set to 365 days (one year) after the video’s initial creation.<p>The video's <b>thumbnail</b> image is automatically generated when the video is created.
+This method retrieves a video's metadata and content given a specified <b>video ID</b>. The method returns the <b>title</b>, <b>size</b>, <b>classification</b>, <b>description</b>, <b>video ID</b>, <b>playList</b>, <b>status</b>, <b>status message</b> (if any), <b>expiration  date</b>, and <b>thumbnail</b> image of the retrieved video. <p>The video’s <b>title</b>, <b>size</b>, <b>classification</b>, and <b>description</b> are set using the <a href=\" /api-docs/commerce/media/resources/video/methods/createVideo\" target=\"_blank\">createVideo</a> method.</p> <p>The video's <b>playList</b> contains two URLs that link to instances of the streaming video based on the supported protocol.</p><p>The <b>status</b> field contains the current status of the video. After a video upload is successfully completed, the video's <b>status</b> will show as <code>PROCESSING</code> until the video reaches one of the terminal states of <code>LIVE</code>, <code>BLOCKED</code> or <code>PROCESSING_FAILED</code>.<p> If a video's processing fails, it could be because the file is corrupted, is too large, or its size doesn’t match what was provided in the metadata. Refer to the error messages to determine the cause of the video’s failure to upload.</p> <p> The <b>status message</b> will indicate why a video was blocked from uploading.</p><p>The video’s <b>expiration date</b> is automatically set to 30 days after the video’s initial creation.<p>The video's <b>thumbnail</b> image is automatically generated when the video is created.
 
 ### Example
 
@@ -85,7 +87,7 @@ This method retrieves a video's metadata and content given a specified <b>video 
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
-// Configure OAuth2 access token for authorization: Authorization Code
+// Configure OAuth2 access token for authorization: api_auth
 $config = macropage\SDKs\ebay\rest\media\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
@@ -95,7 +97,7 @@ $apiInstance = new macropage\SDKs\ebay\rest\media\Api\VideoApi(
     new GuzzleHttp\Client(),
     $config
 );
-$videoId = 'videoId_example'; // string | The <b>video ID</b> for the video to be retrieved.
+$videoId = 'videoId_example'; // string | The unique identifier of the video to be retrieved.
 
 try {
     $result = $apiInstance->getVideo($videoId);
@@ -109,7 +111,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **videoId** | **string**| The &lt;b&gt;video ID&lt;/b&gt; for the video to be retrieved. |
+ **videoId** | **string**| The unique identifier of the video to be retrieved. |
 
 ### Return type
 
@@ -117,7 +119,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Authorization Code](../../README.md#Authorization Code)
+[api_auth](../../README.md#api_auth)
 
 ### HTTP request headers
 
@@ -145,7 +147,7 @@ This method associates the specified file with the specified <b>video ID</b> and
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
-// Configure OAuth2 access token for authorization: Authorization Code
+// Configure OAuth2 access token for authorization: api_auth
 $config = macropage\SDKs\ebay\rest\media\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
@@ -156,7 +158,7 @@ $apiInstance = new macropage\SDKs\ebay\rest\media\Api\VideoApi(
     $config
 );
 $contentType = 'contentType_example'; // string | Use this header to specify the content type for the upload. The Content-Type should be set to <code>application/octet-stream</code>.
-$videoId = 'videoId_example'; // string | The <b>video ID</b> for the uploaded video.
+$videoId = 'videoId_example'; // string | The unique identifier of the video to be uploaded.
 $contentLength = 'contentLength_example'; // string | Use this header to specify the content length for the upload. Use Content-Range: bytes {1}-{2}/{3} and Content-Length:{4} headers.<br /><br /><span class=\"tablenote\"><span style=\"color:#004680\"><strong>Note:</strong></span> This header is optional and is only required for <i>resumable</i> uploads (when an upload is interrupted and must be resumed from a certain point).</span>
 $contentRange = 'contentRange_example'; // string | Use this header to specify the content range for the upload. The Content-Range should be of the following bytes ((?:[0-9]+-[0-9]+)|\\\\\\\\*)/([0-9]+|\\\\\\\\*) pattern.<br /><br /><span class=\"tablenote\"><span style=\"color:#004680\"><strong>Note:</strong></span> This header is optional and is only required for <i>resumable</i> uploads (when an upload is interrupted and must be resumed from a certain point).</span>
 $body = array('key' => new \stdClass); // object | The request payload for this method is the input stream for the video source. The input source must be an .mp4 file of the type MPEG-4 Part 10 or Advanced Video Coding (MPEG-4 AVC).
@@ -173,7 +175,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **contentType** | **string**| Use this header to specify the content type for the upload. The Content-Type should be set to &lt;code&gt;application/octet-stream&lt;/code&gt;. |
- **videoId** | **string**| The &lt;b&gt;video ID&lt;/b&gt; for the uploaded video. |
+ **videoId** | **string**| The unique identifier of the video to be uploaded. |
  **contentLength** | **string**| Use this header to specify the content length for the upload. Use Content-Range: bytes {1}-{2}/{3} and Content-Length:{4} headers.&lt;br /&gt;&lt;br /&gt;&lt;span class&#x3D;\&quot;tablenote\&quot;&gt;&lt;span style&#x3D;\&quot;color:#004680\&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/span&gt; This header is optional and is only required for &lt;i&gt;resumable&lt;/i&gt; uploads (when an upload is interrupted and must be resumed from a certain point).&lt;/span&gt; | [optional]
  **contentRange** | **string**| Use this header to specify the content range for the upload. The Content-Range should be of the following bytes ((?:[0-9]+-[0-9]+)|\\\\\\\\*)/([0-9]+|\\\\\\\\*) pattern.&lt;br /&gt;&lt;br /&gt;&lt;span class&#x3D;\&quot;tablenote\&quot;&gt;&lt;span style&#x3D;\&quot;color:#004680\&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/span&gt; This header is optional and is only required for &lt;i&gt;resumable&lt;/i&gt; uploads (when an upload is interrupted and must be resumed from a certain point).&lt;/span&gt; | [optional]
  **body** | **object**| The request payload for this method is the input stream for the video source. The input source must be an .mp4 file of the type MPEG-4 Part 10 or Advanced Video Coding (MPEG-4 AVC). | [optional]
@@ -184,11 +186,11 @@ void (empty response body)
 
 ### Authorization
 
-[Authorization Code](../../README.md#Authorization Code)
+[api_auth](../../README.md#api_auth)
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: `application/json`
 - **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)

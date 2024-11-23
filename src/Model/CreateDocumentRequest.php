@@ -1,6 +1,6 @@
 <?php
 /**
- * CreateVideoRequest
+ * CreateDocumentRequest
  *
  * PHP version 7.3
  *
@@ -32,10 +32,10 @@ use \ArrayAccess;
 use \macropage\SDKs\ebay\rest\media\ObjectSerializer;
 
 /**
- * CreateVideoRequest Class Doc Comment
+ * CreateDocumentRequest Class Doc Comment
  *
  * @category Class
- * @description The request to create a video, which must contain the video&#39;s &lt;b&gt;title&lt;/b&gt;, &lt;b&gt;size&lt;/b&gt;, and &lt;b&gt;classification&lt;/b&gt;. &lt;b&gt;Description&lt;/b&gt; is an optional field when creating videos.
+ * @description This type contains the metadata used to create the document ID.
  * @package  macropage\SDKs\ebay\rest\media
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -43,7 +43,7 @@ use \macropage\SDKs\ebay\rest\media\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class CreateVideoRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class CreateDocumentRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -52,7 +52,7 @@ class CreateVideoRequest implements ModelInterface, ArrayAccess, \JsonSerializab
       *
       * @var string
       */
-    protected static $openAPIModelName = 'CreateVideoRequest';
+    protected static $openAPIModelName = 'CreateDocumentRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -60,10 +60,8 @@ class CreateVideoRequest implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var string[]
       */
     protected static $openAPITypes = [
-        'classification' => 'string[]',
-        'description' => 'string',
-        'size' => 'int',
-        'title' => 'string'
+        'documentType' => 'string',
+        'languages' => 'string[]'
     ];
 
     /**
@@ -74,10 +72,8 @@ class CreateVideoRequest implements ModelInterface, ArrayAccess, \JsonSerializab
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'classification' => null,
-        'description' => null,
-        'size' => 'int32',
-        'title' => null
+        'documentType' => null,
+        'languages' => null
     ];
 
     /**
@@ -107,10 +103,8 @@ class CreateVideoRequest implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $attributeMap = [
-        'classification' => 'classification',
-        'description' => 'description',
-        'size' => 'size',
-        'title' => 'title'
+        'documentType' => 'documentType',
+        'languages' => 'languages'
     ];
 
     /**
@@ -119,10 +113,8 @@ class CreateVideoRequest implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $setters = [
-        'classification' => 'setClassification',
-        'description' => 'setDescription',
-        'size' => 'setSize',
-        'title' => 'setTitle'
+        'documentType' => 'setDocumentType',
+        'languages' => 'setLanguages'
     ];
 
     /**
@@ -131,10 +123,8 @@ class CreateVideoRequest implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $getters = [
-        'classification' => 'getClassification',
-        'description' => 'getDescription',
-        'size' => 'getSize',
-        'title' => 'getTitle'
+        'documentType' => 'getDocumentType',
+        'languages' => 'getLanguages'
     ];
 
     /**
@@ -194,10 +184,8 @@ class CreateVideoRequest implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     public function __construct(array $data = null)
     {
-        $this->container['classification'] = $data['classification'] ?? null;
-        $this->container['description'] = $data['description'] ?? null;
-        $this->container['size'] = $data['size'] ?? null;
-        $this->container['title'] = $data['title'] ?? null;
+        $this->container['documentType'] = $data['documentType'] ?? null;
+        $this->container['languages'] = $data['languages'] ?? null;
     }
 
     /**
@@ -225,97 +213,49 @@ class CreateVideoRequest implements ModelInterface, ArrayAccess, \JsonSerializab
 
 
     /**
-     * Gets classification
+     * Gets documentType
+     *
+     * @return string|null
+     */
+    public function getDocumentType()
+    {
+        return $this->container['documentType'];
+    }
+
+    /**
+     * Sets documentType
+     *
+     * @param string|null $documentType The type of the document being uploaded. For example, a <code>USER_GUIDE_OR_MANUAL</code> or a <code>SAFETY_DATA_SHEET</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/media/types/api:DocumentTypeEnum'>eBay API documentation</a>
+     *
+     * @return self
+     */
+    public function setDocumentType($documentType)
+    {
+        $this->container['documentType'] = $documentType;
+
+        return $this;
+    }
+
+    /**
+     * Gets languages
      *
      * @return string[]|null
      */
-    public function getClassification()
+    public function getLanguages()
     {
-        return $this->container['classification'];
+        return $this->container['languages'];
     }
 
     /**
-     * Sets classification
+     * Sets languages
      *
-     * @param string[]|null $classification The intended use for this video content. Currently, videos can only be added and associated with eBay listings, so the only supported value is <code>ITEM</code>.
+     * @param string[]|null $languages This array shows the language(s) used in the document.
      *
      * @return self
      */
-    public function setClassification($classification)
+    public function setLanguages($languages)
     {
-        $this->container['classification'] = $classification;
-
-        return $this;
-    }
-
-    /**
-     * Gets description
-     *
-     * @return string|null
-     */
-    public function getDescription()
-    {
-        return $this->container['description'];
-    }
-
-    /**
-     * Sets description
-     *
-     * @param string|null $description The description of the video.
-     *
-     * @return self
-     */
-    public function setDescription($description)
-    {
-        $this->container['description'] = $description;
-
-        return $this;
-    }
-
-    /**
-     * Gets size
-     *
-     * @return int|null
-     */
-    public function getSize()
-    {
-        return $this->container['size'];
-    }
-
-    /**
-     * Sets size
-     *
-     * @param int|null $size The size, in bytes, of the video content. <br><br><b>Max:</b> 157,286,400 bytes
-     *
-     * @return self
-     */
-    public function setSize($size)
-    {
-        $this->container['size'] = $size;
-
-        return $this;
-    }
-
-    /**
-     * Gets title
-     *
-     * @return string|null
-     */
-    public function getTitle()
-    {
-        return $this->container['title'];
-    }
-
-    /**
-     * Sets title
-     *
-     * @param string|null $title The title of the video.
-     *
-     * @return self
-     */
-    public function setTitle($title)
-    {
-        $this->container['title'] = $title;
+        $this->container['languages'] = $languages;
 
         return $this;
     }

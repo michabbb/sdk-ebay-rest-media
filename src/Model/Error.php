@@ -1,6 +1,6 @@
 <?php
 /**
- * CreateVideoRequest
+ * Error
  *
  * PHP version 7.3
  *
@@ -32,10 +32,10 @@ use \ArrayAccess;
 use \macropage\SDKs\ebay\rest\media\ObjectSerializer;
 
 /**
- * CreateVideoRequest Class Doc Comment
+ * Error Class Doc Comment
  *
  * @category Class
- * @description The request to create a video, which must contain the video&#39;s &lt;b&gt;title&lt;/b&gt;, &lt;b&gt;size&lt;/b&gt;, and &lt;b&gt;classification&lt;/b&gt;. &lt;b&gt;Description&lt;/b&gt; is an optional field when creating videos.
+ * @description This type defines the fields that can be returned in an error.
  * @package  macropage\SDKs\ebay\rest\media
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -43,7 +43,7 @@ use \macropage\SDKs\ebay\rest\media\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class CreateVideoRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class Error implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -52,7 +52,7 @@ class CreateVideoRequest implements ModelInterface, ArrayAccess, \JsonSerializab
       *
       * @var string
       */
-    protected static $openAPIModelName = 'CreateVideoRequest';
+    protected static $openAPIModelName = 'Error';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -60,10 +60,15 @@ class CreateVideoRequest implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var string[]
       */
     protected static $openAPITypes = [
-        'classification' => 'string[]',
-        'description' => 'string',
-        'size' => 'int',
-        'title' => 'string'
+        'category' => 'string',
+        'domain' => 'string',
+        'errorId' => 'int',
+        'inputRefIds' => 'string[]',
+        'longMessage' => 'string',
+        'message' => 'string',
+        'outputRefIds' => 'string[]',
+        'parameters' => '\macropage\SDKs\ebay\rest\media\Model\ErrorParameter[]',
+        'subdomain' => 'string'
     ];
 
     /**
@@ -74,10 +79,15 @@ class CreateVideoRequest implements ModelInterface, ArrayAccess, \JsonSerializab
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'classification' => null,
-        'description' => null,
-        'size' => 'int32',
-        'title' => null
+        'category' => null,
+        'domain' => null,
+        'errorId' => 'int32',
+        'inputRefIds' => null,
+        'longMessage' => null,
+        'message' => null,
+        'outputRefIds' => null,
+        'parameters' => null,
+        'subdomain' => null
     ];
 
     /**
@@ -107,10 +117,15 @@ class CreateVideoRequest implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $attributeMap = [
-        'classification' => 'classification',
-        'description' => 'description',
-        'size' => 'size',
-        'title' => 'title'
+        'category' => 'category',
+        'domain' => 'domain',
+        'errorId' => 'errorId',
+        'inputRefIds' => 'inputRefIds',
+        'longMessage' => 'longMessage',
+        'message' => 'message',
+        'outputRefIds' => 'outputRefIds',
+        'parameters' => 'parameters',
+        'subdomain' => 'subdomain'
     ];
 
     /**
@@ -119,10 +134,15 @@ class CreateVideoRequest implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $setters = [
-        'classification' => 'setClassification',
-        'description' => 'setDescription',
-        'size' => 'setSize',
-        'title' => 'setTitle'
+        'category' => 'setCategory',
+        'domain' => 'setDomain',
+        'errorId' => 'setErrorId',
+        'inputRefIds' => 'setInputRefIds',
+        'longMessage' => 'setLongMessage',
+        'message' => 'setMessage',
+        'outputRefIds' => 'setOutputRefIds',
+        'parameters' => 'setParameters',
+        'subdomain' => 'setSubdomain'
     ];
 
     /**
@@ -131,10 +151,15 @@ class CreateVideoRequest implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $getters = [
-        'classification' => 'getClassification',
-        'description' => 'getDescription',
-        'size' => 'getSize',
-        'title' => 'getTitle'
+        'category' => 'getCategory',
+        'domain' => 'getDomain',
+        'errorId' => 'getErrorId',
+        'inputRefIds' => 'getInputRefIds',
+        'longMessage' => 'getLongMessage',
+        'message' => 'getMessage',
+        'outputRefIds' => 'getOutputRefIds',
+        'parameters' => 'getParameters',
+        'subdomain' => 'getSubdomain'
     ];
 
     /**
@@ -194,10 +219,15 @@ class CreateVideoRequest implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     public function __construct(array $data = null)
     {
-        $this->container['classification'] = $data['classification'] ?? null;
-        $this->container['description'] = $data['description'] ?? null;
-        $this->container['size'] = $data['size'] ?? null;
-        $this->container['title'] = $data['title'] ?? null;
+        $this->container['category'] = $data['category'] ?? null;
+        $this->container['domain'] = $data['domain'] ?? null;
+        $this->container['errorId'] = $data['errorId'] ?? null;
+        $this->container['inputRefIds'] = $data['inputRefIds'] ?? null;
+        $this->container['longMessage'] = $data['longMessage'] ?? null;
+        $this->container['message'] = $data['message'] ?? null;
+        $this->container['outputRefIds'] = $data['outputRefIds'] ?? null;
+        $this->container['parameters'] = $data['parameters'] ?? null;
+        $this->container['subdomain'] = $data['subdomain'] ?? null;
     }
 
     /**
@@ -225,97 +255,217 @@ class CreateVideoRequest implements ModelInterface, ArrayAccess, \JsonSerializab
 
 
     /**
-     * Gets classification
-     *
-     * @return string[]|null
-     */
-    public function getClassification()
-    {
-        return $this->container['classification'];
-    }
-
-    /**
-     * Sets classification
-     *
-     * @param string[]|null $classification The intended use for this video content. Currently, videos can only be added and associated with eBay listings, so the only supported value is <code>ITEM</code>.
-     *
-     * @return self
-     */
-    public function setClassification($classification)
-    {
-        $this->container['classification'] = $classification;
-
-        return $this;
-    }
-
-    /**
-     * Gets description
+     * Gets category
      *
      * @return string|null
      */
-    public function getDescription()
+    public function getCategory()
     {
-        return $this->container['description'];
+        return $this->container['category'];
     }
 
     /**
-     * Sets description
+     * Sets category
      *
-     * @param string|null $description The description of the video.
+     * @param string|null $category Identifies the type of erro.
      *
      * @return self
      */
-    public function setDescription($description)
+    public function setCategory($category)
     {
-        $this->container['description'] = $description;
+        $this->container['category'] = $category;
 
         return $this;
     }
 
     /**
-     * Gets size
+     * Gets domain
+     *
+     * @return string|null
+     */
+    public function getDomain()
+    {
+        return $this->container['domain'];
+    }
+
+    /**
+     * Sets domain
+     *
+     * @param string|null $domain Name for the primary system where the error occurred. This is relevant for application errors.
+     *
+     * @return self
+     */
+    public function setDomain($domain)
+    {
+        $this->container['domain'] = $domain;
+
+        return $this;
+    }
+
+    /**
+     * Gets errorId
      *
      * @return int|null
      */
-    public function getSize()
+    public function getErrorId()
     {
-        return $this->container['size'];
+        return $this->container['errorId'];
     }
 
     /**
-     * Sets size
+     * Sets errorId
      *
-     * @param int|null $size The size, in bytes, of the video content. <br><br><b>Max:</b> 157,286,400 bytes
+     * @param int|null $errorId A unique number to identify the error.
      *
      * @return self
      */
-    public function setSize($size)
+    public function setErrorId($errorId)
     {
-        $this->container['size'] = $size;
+        $this->container['errorId'] = $errorId;
 
         return $this;
     }
 
     /**
-     * Gets title
+     * Gets inputRefIds
      *
-     * @return string|null
+     * @return string[]|null
      */
-    public function getTitle()
+    public function getInputRefIds()
     {
-        return $this->container['title'];
+        return $this->container['inputRefIds'];
     }
 
     /**
-     * Sets title
+     * Sets inputRefIds
      *
-     * @param string|null $title The title of the video.
+     * @param string[]|null $inputRefIds An array of request elements most closely associated to the error.
      *
      * @return self
      */
-    public function setTitle($title)
+    public function setInputRefIds($inputRefIds)
     {
-        $this->container['title'] = $title;
+        $this->container['inputRefIds'] = $inputRefIds;
+
+        return $this;
+    }
+
+    /**
+     * Gets longMessage
+     *
+     * @return string|null
+     */
+    public function getLongMessage()
+    {
+        return $this->container['longMessage'];
+    }
+
+    /**
+     * Sets longMessage
+     *
+     * @param string|null $longMessage A more detailed explanation of the error.
+     *
+     * @return self
+     */
+    public function setLongMessage($longMessage)
+    {
+        $this->container['longMessage'] = $longMessage;
+
+        return $this;
+    }
+
+    /**
+     * Gets message
+     *
+     * @return string|null
+     */
+    public function getMessage()
+    {
+        return $this->container['message'];
+    }
+
+    /**
+     * Sets message
+     *
+     * @param string|null $message Information on how to correct the problem, in the end user's terms and language where applicable.
+     *
+     * @return self
+     */
+    public function setMessage($message)
+    {
+        $this->container['message'] = $message;
+
+        return $this;
+    }
+
+    /**
+     * Gets outputRefIds
+     *
+     * @return string[]|null
+     */
+    public function getOutputRefIds()
+    {
+        return $this->container['outputRefIds'];
+    }
+
+    /**
+     * Sets outputRefIds
+     *
+     * @param string[]|null $outputRefIds An array of request elements most closely associated to the error.
+     *
+     * @return self
+     */
+    public function setOutputRefIds($outputRefIds)
+    {
+        $this->container['outputRefIds'] = $outputRefIds;
+
+        return $this;
+    }
+
+    /**
+     * Gets parameters
+     *
+     * @return \macropage\SDKs\ebay\rest\media\Model\ErrorParameter[]|null
+     */
+    public function getParameters()
+    {
+        return $this->container['parameters'];
+    }
+
+    /**
+     * Sets parameters
+     *
+     * @param \macropage\SDKs\ebay\rest\media\Model\ErrorParameter[]|null $parameters An array of name/value pairs that describe details the error condition. These are useful when multiple errors are returned.
+     *
+     * @return self
+     */
+    public function setParameters($parameters)
+    {
+        $this->container['parameters'] = $parameters;
+
+        return $this;
+    }
+
+    /**
+     * Gets subdomain
+     *
+     * @return string|null
+     */
+    public function getSubdomain()
+    {
+        return $this->container['subdomain'];
+    }
+
+    /**
+     * Sets subdomain
+     *
+     * @param string|null $subdomain Further helps indicate which subsystem the error is coming from. System subcategories include: Initialization, Serialization, Security, Monitoring, Rate Limiting, etc.
+     *
+     * @return self
+     */
+    public function setSubdomain($subdomain)
+    {
+        $this->container['subdomain'] = $subdomain;
 
         return $this;
     }
